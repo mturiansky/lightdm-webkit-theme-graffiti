@@ -34,7 +34,7 @@ input[type="text"], input[type="password"] {
 input[type="text"]:focus, input[type="password"]:focus {
     background-color: #aaa;
     border: 2px solid #aa1111;
-    color: #aa1111;
+    color: #000;
 }
 
 input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder {
@@ -55,7 +55,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-i
 
 .btn-danger {
     color: #aa1111;
-    background-color: #808080;
+    background-color: #aaa;
     border: 2px solid #aa1111;
 }
 
