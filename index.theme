@@ -1,0 +1,7 @@
+[theme]
+name=lightdm-webkit-theme-graffiti
+version=0.1
+description=A simple lightdm webkit theme
+engine=lightdm-webkit2-greeter
+url=index.html
+session=bspwm
