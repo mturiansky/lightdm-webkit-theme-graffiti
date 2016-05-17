@@ -1,0 +1,66 @@
+body {
+    background: url(../img/red2.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.screen {
+    height: 100vh;
+}
+
+.form-login {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 350px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #222;
+    border: 2px solid #aa1111;
+}
+
+.form-login > h2 {
+    margin-top: 0;
+    text-align: center;
+    color: white;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: #aaa;
+    border: 2px solid #aa1111;
+    color: #000;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    background-color: #aaa;
+    border: 2px solid #aa1111;
+    color: #aa1111;
+}
+
+input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder {
+    color: #606060;
+}
+
+#username {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#password {
+    margin-bottom: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.btn-danger {
+    color: #aa1111;
+    background-color: #808080;
+    border: 2px solid #aa1111;
+}
+
+.btn-danger:hover {
+    color: white;
+    background-color: #aa1111;
+    border: 2px solid #aa1111;
+}
