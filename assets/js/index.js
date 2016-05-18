@@ -12,11 +12,10 @@ var get_user = function (user) {
 
 var authentication_complete = function () {
     if (lightdm.is_authenticated) {
-        return lightdm.login(lightdm.authentication_user, lightdm.default_session);
+        lightdm.login(lightdm.authentication_user, lightdm.default_session);
     } else {
         $('#password').val('');
         console.log('Invalid password.');
-        return;
     }
 };
 
