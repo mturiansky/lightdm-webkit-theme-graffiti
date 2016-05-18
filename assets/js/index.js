@@ -10,6 +10,16 @@ var get_user = function (user) {
     return false;
 };
 
+var authentication_complete = function () {
+    if (lightdm.is_authenticated) {
+        return lightdm.login(lightdm.authentication_user, lightdm.default_session);
+    } else {
+        $('#password').val('');
+        console.log('Invalid password.');
+        return;
+    }
+};
+
 $(document).ready(function () {
     $('#login-button').on('click', function (event) {
         console.log('Beginning login...');
@@ -22,7 +32,19 @@ $(document).ready(function () {
         } else {
             $('#username').val('');
             $('#password').val('');
-            console.log('Login failed.');
+            console.log('Invalid username.');
+        }
+    });
+
+    $('#password').keyup(function (event) {
+        if (event.keyCode == 13) {
+            $('#login-button').click();
+        }
+    });
+
+    $('#username').keyup(function (event) {
+        if (event.keyCode == 13) {
+            $('#password').focus();
         }
     });
 });
