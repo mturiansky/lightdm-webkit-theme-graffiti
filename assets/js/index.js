@@ -36,6 +36,18 @@ $(document).ready(function () {
         }
     });
 
+    $('#sleep').on('click', function (event) {
+        lightdm.suspend();
+    });
+
+    $('#reboot').on('click', function (event) {
+        lightdm.restart();
+    });
+
+    $('#shutdown').on('click', function (event) {
+        lightdm.shutdown();
+    });
+
     $('#password').keyup(function (event) {
         if (event.keyCode == 13) {
             $('#login-button').click();
