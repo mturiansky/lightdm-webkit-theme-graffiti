@@ -1,7 +1,10 @@
 var get_user = function (user) {
+    if (lightdm._username) {
+        lightdm.cancel_authentication();
+    }
+
     for (var i = 0; i < lightdm.users.length; i++) {
         if (user == lightdm.users[i].name) {
-            lightdm.cancel_timed_login();
             lightdm.start_authentication(lightdm.users[i].name);
             return true;
         }
@@ -10,10 +13,23 @@ var get_user = function (user) {
     return false;
 };
 
-var authentication_complete = function () {
+window.show_prompt = function (text) {
+    console.log('prompt: ' + text);
+};
+window.show_message = function (text, type) {
+    console.log(type + ": " + text);
+};
+
+window.authentication_complete = function () {
+    console.log('Authentication complete...');
     if (lightdm.is_authenticated) {
-        lightdm.login(lightdm.authentication_user, lightdm.default_session);
+        console.log('Login...');
+        lightdm.login(lightdm.authentication_user, 'bspwm');
     } else {
+        if (lightdm._username) {
+            lightdm.cancel_authentication();
+        }
+
         $('#password').val('');
         console.log('Invalid password.');
     }
@@ -27,7 +43,10 @@ $(document).ready(function () {
 
         if (get_user(uname)) {
             console.log('Found username...');
-            lightdm.provide_secret(passwd);
+            lightdm.cancel_timed_login();
+            setTimeout(function () {
+                lightdm.provide_secret(passwd);
+            }, 1000);
         } else {
             $('#username').val('');
             $('#password').val('');
