@@ -14,11 +14,13 @@ var update_user = function () {
     }
 
     $('#username').html(lightdm.users[CURRENT_USER_ID].display_name);
+    if (lightdm.users[CURRENT_USER_ID].image == '') {
+        $('.avatar').attr('src', 'assets/img/avatar.png');
+    } else {
+        $('.avatar').attr('src', lightdm.users[CURRENT_USER_ID].image);
+    }
+    
     lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
-};
-
-var setup = function () {
-    update_user();
 };
 
 window.show_prompt = function (text) {
@@ -41,7 +43,7 @@ window.authentication_complete = function () {
 };
 
 $(document).ready(function () {
-    setup();
+    update_user();
 
     $('.go-button').on('click', function (event) {
         console.log('Beginning login...');
