@@ -21,12 +21,12 @@ body {
 }
 
 .input-groups > h3 {
-    margin-top: 0;
+    margin-top: 2px;
     color: black;
 }
 
 .input-groups > input {
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .avatar {
@@ -106,4 +106,22 @@ input[type="password"]::-webkit-input-placeholder {
     color: #aa1111;
     border: 1px solid #aa1111;
     border-radius: 5px;
+}
+
+.left-button {
+    float: left;
+}
+
+.right-button {
+    float: right;
+}
+
+.left-button, .right-button {
+    position: relative;
+    padding: 8px;
+    top: -90px;
+}
+
+.left-button:hover, .right-button:hover {
+    color: #aa1111;
 }
