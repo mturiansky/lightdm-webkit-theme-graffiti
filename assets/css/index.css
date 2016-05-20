@@ -54,7 +54,7 @@ body {
 
 input[type="password"] {
     width: 100%;
-    margin-left: 2px;
+    padding: 0 15px 0 3px;
     background-color: #808080;
     border: none;
     border-bottom: 2px solid #aa1111;
@@ -73,6 +73,18 @@ input[type="password"]::-webkit-input-placeholder {
     color: #606060;
 }
 
+.go-button {
+    padding-right: 2px;
+    float: right;
+    position: relative;
+    top: -32px;
+    color: #606060;
+}
+
+.go-button:hover {
+    color: #aa1111;
+}
+
 #username {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
@@ -83,19 +95,6 @@ input[type="password"]::-webkit-input-placeholder {
     margin-bottom: 10px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-}
-
-.btn-danger {
-    color: #aa1111;
-    background-color: #aaa;
-    border: 2px solid #aa1111;
-    margin-bottom: 15px;
-}
-
-.btn-danger:hover {
-    color: white;
-    background-color: #aa1111;
-    border: 2px solid #aa1111;
 }
 
 .control-buttons {
