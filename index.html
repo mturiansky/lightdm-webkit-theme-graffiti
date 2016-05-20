@@ -15,9 +15,16 @@
         <div class="container screen">
             <div class="form-login">
                 <h2>Welcome</h2>
-                <input type="text" id="username" class="form-control" placeholder="Username" required>
-                <input type="password" id="password" class="form-control" placeholder="Password" required>
-                <div id="login-button" class="btn btn-lg btn-danger btn-block">Log in</div>
+                <div class="login-panel">
+                    <div class="col-md-4">
+                        <img class="avatar" src="assets/img/avatar.png">
+                    </div>
+                    <div class="input-groups col-md-8">
+                        <h3 id="username">Username</h3>
+                        <input type="password" id="password" placeholder="password">
+                        <div class="go-button"><span class="glyphicon glyphicon-triangle-right"></span></div>
+                    </div>
+                </div>
                 <div class="row text-center">
                     <div class="col-md-4">
                         <div class="control-buttons" id="sleep"><span class="glyphicon glyphicon-hourglass"></span></div>
@@ -28,6 +35,12 @@
                     <div class="col-md-4">
                         <div class="control-buttons" id="shutdown"><span class="glyphicon glyphicon-off"></span></div>
                     </div>
+                </div>
+                <div class="left-button">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+                <div class="right-button">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
                 </div>
             </div>
         </div>

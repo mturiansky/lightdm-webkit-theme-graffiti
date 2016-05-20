@@ -1,16 +1,26 @@
-var get_user = function (user) {
+var CURRENT_USER_ID = 0;
+
+var validate_user_id = function () {
+    if (CURRENT_USER_ID >= lightdm.users.length) {
+        CURRENT_USER_ID = 0;
+    } else if (CURRENT_USER_ID < 0) {
+        CURRENT_USER_ID = (lightdm.users.length - 1);
+    }
+};
+
+var update_user = function () {
     if (lightdm._username) {
         lightdm.cancel_authentication();
     }
 
-    for (var i = 0; i < lightdm.users.length; i++) {
-        if (user == lightdm.users[i].name) {
-            lightdm.start_authentication(lightdm.users[i].name);
-            return true;
-        }
+    $('#username').html(lightdm.users[CURRENT_USER_ID].display_name);
+    if (lightdm.users[CURRENT_USER_ID].image == '') {
+        $('.avatar').attr('src', 'assets/img/avatar.png');
+    } else {
+        $('.avatar').attr('src', lightdm.users[CURRENT_USER_ID].image);
     }
-
-    return false;
+    
+    lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
 };
 
 window.show_prompt = function (text) {
@@ -26,32 +36,20 @@ window.authentication_complete = function () {
         console.log('Login...');
         lightdm.login(lightdm.authentication_user, 'bspwm');
     } else {
-        if (lightdm._username) {
-            lightdm.cancel_authentication();
-        }
-
+        update_user();
         $('#password').val('');
         console.log('Invalid password.');
     }
 };
 
 $(document).ready(function () {
-    $('#login-button').on('click', function (event) {
-        console.log('Beginning login...');
-        var uname = $('#username').val() || null;
-        var passwd = $('#password').val() || null;
+    update_user();
 
-        if (get_user(uname)) {
-            console.log('Found username...');
-            lightdm.cancel_timed_login();
-            setTimeout(function () {
-                lightdm.provide_secret(passwd);
-            }, 1000);
-        } else {
-            $('#username').val('');
-            $('#password').val('');
-            console.log('Invalid username.');
-        }
+    $('.go-button').on('click', function (event) {
+        console.log('Beginning login...');
+        var passwd = $('#password').val() || null;
+        lightdm.cancel_timed_login();
+        lightdm.provide_secret(passwd);
     });
 
     $('#sleep').on('click', function (event) {
@@ -68,13 +66,19 @@ $(document).ready(function () {
 
     $('#password').keyup(function (event) {
         if (event.keyCode == 13) {
-            $('#login-button').click();
+            $('.go-button').click();
         }
     });
 
-    $('#username').keyup(function (event) {
-        if (event.keyCode == 13) {
-            $('#password').focus();
-        }
+    $('.right-button').on('click', function (event) {
+        CURRENT_USER_ID += 1;
+        validate_user_id();
+        update_user();
+    });
+
+    $('.left-button').on('click', function (event) {
+        CURRENT_USER_ID -= 1;
+        validate_user_id();
+        update_user();
     });
 });
