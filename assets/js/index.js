@@ -19,7 +19,7 @@ var update_user = function () {
     } else {
         $('.avatar').attr('src', lightdm.users[CURRENT_USER_ID].image);
     }
-    
+
     lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
 };
 
@@ -44,6 +44,8 @@ window.authentication_complete = function () {
 
 $(document).ready(function () {
     update_user();
+
+    $('#password').focus();
 
     $('.go-button').on('click', function (event) {
         console.log('Beginning login...');
