@@ -34,6 +34,7 @@ window.authentication_complete = function () {
     console.log('Authentication complete...');
     if (lightdm.is_authenticated) {
         console.log('Login...');
+        settings.saveLastUser(lightdm.authentication_user.name);
         lightdm.login(lightdm.authentication_user, 'bspwm');
     } else {
         update_user();
@@ -43,6 +44,10 @@ window.authentication_complete = function () {
 };
 
 $(document).ready(function () {
+    var _id = settings.getLastUserId(lightdm.users);
+    if (_id !== -1) {
+        CURRENT_USER_ID = _id;
+    }
     update_user();
 
     $('#password').focus();
