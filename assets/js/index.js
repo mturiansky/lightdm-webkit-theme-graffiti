@@ -24,16 +24,19 @@ var update_user = function () {
     lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
 };
 
+var toggle_hide_groups = function () {
+    $('.hide-group-1').toggle();
+    $('.hide-group-2').toggle();
+};
+
 var select_session = function (i) {
-    console.log(i);
     if (i < -1 || i >= lightdm.sessions.length) {
         SESSION_CHOICE_ID = -1;
     } else {
         SESSION_CHOICE_ID = i;
     }
 
-    $('.hide-group-2').hide();
-    $('.hide-group-1').show();
+    toggle_hide_groups();
 };
 
 window.show_prompt = function (text) {
@@ -48,7 +51,11 @@ window.authentication_complete = function () {
     if (lightdm.is_authenticated) {
         console.log('Login...');
         settings.saveLastUser(lightdm.authentication_user.name);
-        lightdm.login(lightdm.authentication_user, 'bspwm');
+        if (SESSION_CHOICE_ID === -1) {
+            lightdm.login(lightdm.authentication_user, lightdm.default_session);
+        } else {
+            lightdm.login(lightdm.authentication_user, lightdm.sessions[SESSION_CHOICE_ID]);
+        }
     } else {
         update_user();
         $('#password').val('');
@@ -76,10 +83,7 @@ $(document).ready(function () {
         lightdm.provide_secret(passwd);
     });
 
-    $('.session-button').on('click', function (event) {
-        $('.hide-group-1').toggle();
-        $('.hide-group-2').toggle();
-    });
+    $('.session-button').on('click', toggle_hide_groups);
 
     $('#sleep').on('click', function (event) {
         lightdm.suspend();
