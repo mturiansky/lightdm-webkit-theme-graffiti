@@ -10,7 +10,7 @@ var _getLastUserId = function (userList) {
         }
     }
 
-    return -1;
+    return 0;
 };
 
 var settings = {

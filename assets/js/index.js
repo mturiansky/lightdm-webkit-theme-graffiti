@@ -44,10 +44,8 @@ window.authentication_complete = function () {
 };
 
 $(document).ready(function () {
-    var _id = settings.getLastUserId(lightdm.users);
-    if (_id !== -1) {
-        CURRENT_USER_ID = _id;
-    }
+    CURRENT_USER_ID = settings.getLastUserId(lightdm.users);
+    validate_user_id();
     update_user();
 
     $('#password').focus();
