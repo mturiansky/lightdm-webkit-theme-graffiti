@@ -21,7 +21,16 @@ body {
     border: 2px solid #aa1111;
     background-color: #808080;
     margin-bottom: 10px;
-    hieght: 10px;
+}
+
+.session-choice-list {
+    text-align: center;
+    color: black;
+    font-size: 15px;
+}
+
+.session-choice-list > div:hover {
+    background-color: #aa1111;
 }
 
 .input-groups {

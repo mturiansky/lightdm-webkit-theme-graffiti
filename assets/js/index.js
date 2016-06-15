@@ -1,4 +1,5 @@
 var CURRENT_USER_ID = 0;
+var SESSION_CHOICE_ID = -1;
 
 var validate_user_id = function () {
     if (CURRENT_USER_ID >= lightdm.users.length) {
@@ -21,6 +22,15 @@ var update_user = function () {
     }
 
     lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
+};
+
+var select_session = function (i) {
+    console.log(i);
+    if (i < -1 || i >= lightdm.sessions.length) {
+        SESSION_CHOICE_ID = -1;
+    } else {
+        SESSION_CHOICE_ID = i;
+    }
 };
 
 window.show_prompt = function (text) {
@@ -52,6 +62,10 @@ $(document).ready(function () {
     $('.hide-group-2').show();
 
     //populate session list
+    $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+    for (var i = 0; i < lightdm.sessions.length; i++) {
+        $('.session-choice-list').append('<div onclick="select_session(' + i + ')">' + lightdm.sessions[i].name.toLowerCase() + '</div>');
+    }
 
     $('#password').focus();
 
