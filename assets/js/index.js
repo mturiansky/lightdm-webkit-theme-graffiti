@@ -31,6 +31,9 @@ var select_session = function (i) {
     } else {
         SESSION_CHOICE_ID = i;
     }
+
+    $('.hide-group-2').hide();
+    $('.hide-group-1').show();
 };
 
 window.show_prompt = function (text) {
@@ -58,9 +61,6 @@ $(document).ready(function () {
     validate_user_id();
     update_user();
 
-    $('.hide-group-1').hide();
-    $('.hide-group-2').show();
-
     //populate session list
     $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
     for (var i = 0; i < lightdm.sessions.length; i++) {
@@ -74,6 +74,11 @@ $(document).ready(function () {
         var passwd = $('#password').val() || null;
         lightdm.cancel_timed_login();
         lightdm.provide_secret(passwd);
+    });
+
+    $('.session-button').on('click', function (event) {
+        $('.hide-group-1').toggle();
+        $('.hide-group-2').toggle();
     });
 
     $('#sleep').on('click', function (event) {
