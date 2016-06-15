@@ -48,6 +48,11 @@ $(document).ready(function () {
     validate_user_id();
     update_user();
 
+    $('.hide-group-1').hide();
+    $('.hide-group-2').show();
+
+    //populate session list
+
     $('#password').focus();
 
     $('.go-button').on('click', function (event) {

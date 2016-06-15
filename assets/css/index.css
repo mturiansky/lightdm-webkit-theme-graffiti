@@ -16,6 +16,14 @@ body {
     height: 89px;
 }
 
+.session-choice-panel {
+    padding: 10px;
+    border: 2px solid #aa1111;
+    background-color: #808080;
+    margin-bottom: 10px;
+    hieght: 10px;
+}
+
 .input-groups {
     padding-left: 0;
 }
