@@ -1,4 +1,5 @@
 var CURRENT_USER_ID = 0;
+var SESSION_CHOICE_ID = -1;
 
 var validate_user_id = function () {
     if (CURRENT_USER_ID >= lightdm.users.length) {
@@ -23,6 +24,21 @@ var update_user = function () {
     lightdm.start_authentication(lightdm.users[CURRENT_USER_ID].name);
 };
 
+var toggle_hide_groups = function () {
+    $('.hide-group-1').toggle();
+    $('.hide-group-2').toggle();
+};
+
+var select_session = function (i) {
+    if (i < -1 || i >= lightdm.sessions.length) {
+        SESSION_CHOICE_ID = -1;
+    } else {
+        SESSION_CHOICE_ID = i;
+    }
+
+    toggle_hide_groups();
+};
+
 window.show_prompt = function (text) {
     console.log('prompt: ' + text);
 };
@@ -34,7 +50,12 @@ window.authentication_complete = function () {
     console.log('Authentication complete...');
     if (lightdm.is_authenticated) {
         console.log('Login...');
-        lightdm.login(lightdm.authentication_user, 'bspwm');
+        settings.saveLastUser(lightdm.authentication_user.name);
+        if (SESSION_CHOICE_ID === -1) {
+            lightdm.login(lightdm.authentication_user, lightdm.sessions[0].key);
+        } else {
+            lightdm.login(lightdm.authentication_user, lightdm.sessions[SESSION_CHOICE_ID].key);
+        }
     } else {
         update_user();
         $('#password').val('');
@@ -43,7 +64,15 @@ window.authentication_complete = function () {
 };
 
 $(document).ready(function () {
+    CURRENT_USER_ID = settings.getLastUserId(lightdm.users);
+    validate_user_id();
     update_user();
+
+    //populate session list
+    $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+    for (var i = 0; i < lightdm.sessions.length; i++) {
+        $('.session-choice-list').append('<div onclick="select_session(' + i + ')">' + lightdm.sessions[i].name.toLowerCase() + '</div>');
+    }
 
     $('#password').focus();
 
@@ -53,6 +82,8 @@ $(document).ready(function () {
         lightdm.cancel_timed_login();
         lightdm.provide_secret(passwd);
     });
+
+    $('.session-button').on('click', toggle_hide_groups);
 
     $('#sleep').on('click', function (event) {
         lightdm.suspend();

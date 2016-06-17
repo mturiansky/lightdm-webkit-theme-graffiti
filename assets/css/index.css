@@ -8,12 +8,41 @@ body {
     height: 100vh;
 }
 
+.session-button {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    float: right;
+    color: #808080;
+}
+
+.session-button:hover {
+    color: #aa1111;
+}
+
 .login-panel {
     padding: 10px;
     border: 2px solid #aa1111;
     background-color: #808080;
     margin-bottom: 10px;
     height: 89px;
+}
+
+.session-choice-panel {
+    padding: 10px;
+    border: 2px solid #aa1111;
+    background-color: #808080;
+    margin-bottom: 10px;
+}
+
+.session-choice-list {
+    text-align: center;
+    color: black;
+    font-size: 15px;
+}
+
+.session-choice-list > div:hover {
+    background-color: #aa1111;
 }
 
 .input-groups {

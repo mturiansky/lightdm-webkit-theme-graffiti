@@ -20,7 +20,7 @@ if (!('lightdm' in window)) {
         {
             name: "us",
             short_description: "test description",
-            short_description:"really long epic description"
+            long_description:"really long epic description"
         }
     ];
     lightdm.default_layout = lightdm.layouts[0];
@@ -85,14 +85,14 @@ if (!('lightdm' in window)) {
 
     lightdm.provide_secret = function (secret) {
         if (typeof lightdm._username == 'undefined' || !lightdm._username) {
-            throw "must call start_authentication first"
+            throw "must call start_authentication first";
         }
         _lightdm_mock_check_argument_length(arguments, 1);
 
-        var user = _lightdm_mock_get_user(lightdm.username);
+        var user = _lightdm_mock_get_user(lightdm._username);
 
         // That's right, passwords are the same as the username's!
-        if (!user && secret == lightdm._username) {
+        if (user && secret == lightdm._username) {
             lightdm.is_authenticated = true;
             lightdm.authentication_user = user;
         } else {
@@ -175,7 +175,7 @@ var _lightdm_mock_check_argument_length = function (args, length) {
     if (args.length != length) {
         throw "incorrect number of arguments in function call";
     }
-}
+};
 
 var _lightdm_mock_get_user = function (username) {
     var user = null;
@@ -186,10 +186,12 @@ var _lightdm_mock_get_user = function (username) {
         }
     }
     return user;
-}
+};
+
 window.show_prompt = function(msg) {
     console.log(msg);
 };
+
 window.show_error = function(msg) {
     console.error(msg);
 };
