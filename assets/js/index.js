@@ -52,9 +52,9 @@ window.authentication_complete = function () {
         console.log('Login...');
         settings.saveLastUser(lightdm.authentication_user.name);
         if (SESSION_CHOICE_ID === -1) {
-            lightdm.login(lightdm.authentication_user, lightdm.default_session);
+            lightdm.login(lightdm.authentication_user, lightdm.default_session.key);
         } else {
-            lightdm.login(lightdm.authentication_user, lightdm.sessions[SESSION_CHOICE_ID]);
+            lightdm.login(lightdm.authentication_user, lightdm.sessions[SESSION_CHOICE_ID].key);
         }
     } else {
         update_user();
