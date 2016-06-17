@@ -3,8 +3,6 @@
 A simple theme for lightdm-webkit2-greeter. This project is still being developed with many features still to be implemented.
 
 To do:
-- session choice
-- default to the previous logged in account
 - background choice
 - simplified variables to change the coloring
 
