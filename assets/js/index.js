@@ -52,8 +52,10 @@ window.authentication_complete = function () {
         console.log('Login...');
         settings.saveLastUser(lightdm.authentication_user.name);
         if (SESSION_CHOICE_ID === -1) {
+            settings.saveLastSession(lightdm.sessions[0].name);
             lightdm.login(lightdm.authentication_user, lightdm.sessions[0].key);
         } else {
+            settings.saveLastSession(lightdm.sessions[SESSION_CHOICE_ID].name);
             lightdm.login(lightdm.authentication_user, lightdm.sessions[SESSION_CHOICE_ID].key);
         }
     } else {
@@ -65,6 +67,7 @@ window.authentication_complete = function () {
 
 $(document).ready(function () {
     CURRENT_USER_ID = settings.getLastUserId(lightdm.users);
+    SESSION_CHOICE_ID = settings.getLastSessionId(lightdm.sessions);
     validate_user_id();
     update_user();
 
