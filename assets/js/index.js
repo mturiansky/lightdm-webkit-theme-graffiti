@@ -39,6 +39,21 @@ var select_session = function (i) {
     toggle_hide_groups();
 };
 
+var update_session_list = function () {
+    // must clear list first
+
+    $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+    for (var i = 0; i < lightdm.sessions.length; i++) {
+        var to_append = '';
+        if (i === SESSION_CHOICE_ID) {
+            // need to make this not mess up text centering
+            to_append += '<span class="glyphicon glyphicon-arrow-right pull-left"></span>';
+        }
+        to_append += '<div onclick="select_session(' + i + ')">' + lightdm.sessions[i].name.toLowerCase() + '</div>';
+        $('.session-choice-list').append(to_append);
+    }
+};
+
 window.show_prompt = function (text) {
     console.log('prompt: ' + text);
 };
@@ -72,10 +87,7 @@ $(document).ready(function () {
     update_user();
 
     //populate session list
-    $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
-    for (var i = 0; i < lightdm.sessions.length; i++) {
-        $('.session-choice-list').append('<div onclick="select_session(' + i + ')">' + lightdm.sessions[i].name.toLowerCase() + '</div>');
-    }
+    update_session_list();
 
     $('#password').focus();
 
