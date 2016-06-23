@@ -37,12 +37,18 @@ var select_session = function (i) {
     }
 
     toggle_hide_groups();
+    update_session_list();
 };
 
 var update_session_list = function () {
-    // must clear list first
+    $('.session-choice-list').empty();
 
-    $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+    if (SESSION_CHOICE_ID === -1) {
+        $('.session-choice-list').append('<span class="glyphicon glyphicon-arrow-right pull-left"></span><div onclick="select_session(-1)">default</div>');
+    } else {
+        $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+    }
+
     for (var i = 0; i < lightdm.sessions.length; i++) {
         var to_append = '';
         if (i === SESSION_CHOICE_ID) {
