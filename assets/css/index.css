@@ -41,6 +41,11 @@ body {
     font-size: 15px;
 }
 
+.session-choice-list > .row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 .session-choice-list > div:hover {
     background-color: #aa1111;
 }

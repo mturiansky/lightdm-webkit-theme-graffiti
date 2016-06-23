@@ -15,7 +15,7 @@ var update_user = function () {
     }
 
     $('#username').html(lightdm.users[CURRENT_USER_ID].display_name);
-    if (lightdm.users[CURRENT_USER_ID].image == '') {
+    if (lightdm.users[CURRENT_USER_ID].image === '') {
         $('.avatar').attr('src', 'assets/img/avatar.png');
     } else {
         $('.avatar').attr('src', lightdm.users[CURRENT_USER_ID].image);
@@ -41,21 +41,29 @@ var select_session = function (i) {
 };
 
 var update_session_list = function () {
+    var START = '<div class="row" onclick="select_session(';
+    var LEFT_ARROW = '<div class="col-xs-2"><span class="glyphicon glyphicon-arrow-right text-left"></span></div>';
+    var NO_LEFT_ARROW = '<div class="col-xs-2"></div>';
+    var DIV_OPEN = '<div class="col-xs-8 text-center">';
+    var DIV_CLOSE = '</div><div class="col-xs-2"></div></div>';
+
     $('.session-choice-list').empty();
 
     if (SESSION_CHOICE_ID === -1) {
-        $('.session-choice-list').append('<span class="glyphicon glyphicon-arrow-right pull-left"></span><div onclick="select_session(-1)">default</div>');
+        $('.session-choice-list').append(START + -1 + ')">' + LEFT_ARROW + DIV_OPEN + 'default' + DIV_CLOSE);
     } else {
-        $('.session-choice-list').append('<div onclick="select_session(-1)">default</div>');
+        $('.session-choice-list').append(START + -1 + ')">' + NO_LEFT_ARROW + DIV_OPEN + 'default' + DIV_CLOSE);
     }
 
     for (var i = 0; i < lightdm.sessions.length; i++) {
-        var to_append = '';
+        var to_append = START + i + ')">';
         if (i === SESSION_CHOICE_ID) {
             // need to make this not mess up text centering
-            to_append += '<span class="glyphicon glyphicon-arrow-right pull-left"></span>';
+            to_append += LEFT_ARROW;
+        } else {
+            to_append += NO_LEFT_ARROW;
         }
-        to_append += '<div onclick="select_session(' + i + ')">' + lightdm.sessions[i].name.toLowerCase() + '</div>';
+        to_append += DIV_OPEN + lightdm.sessions[i].name.toLowerCase() + DIV_CLOSE;
         $('.session-choice-list').append(to_append);
     }
 };
