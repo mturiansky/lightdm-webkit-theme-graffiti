@@ -38,7 +38,12 @@ body {
 .session-choice-list {
     text-align: center;
     color: black;
-    font-size: 15px;
+    font-size: 16px;
+}
+
+.session-choice-list > .row {
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .session-choice-list > div:hover {
