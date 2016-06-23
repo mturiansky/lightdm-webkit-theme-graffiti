@@ -58,7 +58,6 @@ var update_session_list = function () {
     for (var i = 0; i < lightdm.sessions.length; i++) {
         var to_append = START + i + ')">';
         if (i === SESSION_CHOICE_ID) {
-            // need to make this not mess up text centering
             to_append += LEFT_ARROW;
         } else {
             to_append += NO_LEFT_ARROW;
